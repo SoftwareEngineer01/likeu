@@ -17,7 +17,7 @@ class AgendaController extends ResponseController
             'id_client' => 'required',
             'affair' => 'required',
             'date' => 'required|date_format:Y-m-d H:i',
-            'status' => 'required'
+            'status' => 'required|in:Programada,programada,Realizada,realizada,Cancelada,cancelada,No Asistida,no asistida'
         ]);
 
         $client = Client::where('id', '=', $request->get('id_client'))->first();
