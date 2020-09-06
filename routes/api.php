@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('addClient', 'ClientController@create');
 Route::post('addAgenda', 'AgendaController@addAgenda');
+Route::put('editAgenda', 'AgendaController@editAgenda');
