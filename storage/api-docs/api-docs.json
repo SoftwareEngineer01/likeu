@@ -1,0 +1,395 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Clientes",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        },
+        {
+            "url": "http://127.0.0.1:8000"
+        },
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api/addAgenda": {
+            "post": {
+                "tags": [
+                    "Agregar agenda"
+                ],
+                "operationId": "App\\Http\\Controllers\\AgendaController::addAgenda",
+                "parameters": [
+                    {
+                        "name": "id_client",
+                        "in": "query",
+                        "description": "Id del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "affair",
+                        "in": "query",
+                        "description": "Asunto de la agenda",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Fecha agenda Y-m-d H:i",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Estado de la Agenda : Programada - Realizada - Cancelada - No asistida ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Creación de cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "id_client",
+                                        "affair",
+                                        "date",
+                                        "status"
+                                    ],
+                                    "properties": {
+                                        "id_client": {
+                                            "type": "integer",
+                                            "format": "id_client",
+                                            "example": "1"
+                                        },
+                                        "affair": {
+                                            "type": "string",
+                                            "format": "affair",
+                                            "example": "Reunión"
+                                        },
+                                        "date": {
+                                            "type": "date",
+                                            "example": "2020-09-10 10:06"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Programada"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/editAgenda": {
+            "put": {
+                "tags": [
+                    "Modificar agenda"
+                ],
+                "operationId": "App\\Http\\Controllers\\AgendaController::editAgenda",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Id de la agenda",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "affair",
+                        "in": "query",
+                        "description": "Asunto de la agenda",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Fecha agenda Y-m-d H:i",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Estado de la Agenda : Programada - Realizada - Cancelada - No asistida ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Creación de cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "id",
+                                        "affair",
+                                        "date",
+                                        "status"
+                                    ],
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "id",
+                                            "example": "1"
+                                        },
+                                        "id_client": {
+                                            "type": "integer",
+                                            "format": "id",
+                                            "example": "2"
+                                        },
+                                        "affair": {
+                                            "type": "string",
+                                            "format": "affair",
+                                            "example": "Reunión"
+                                        },
+                                        "date": {
+                                            "type": "date",
+                                            "example": "2020-09-10 10:06"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Cancelada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "operationId": "App\\Http\\Controllers\\AuthController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email - admin@admin.com",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña - 123456",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login usuario",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "email",
+                                        "password"
+                                    ],
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "format": "access_token",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBp"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "format": "token_type",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "expires_in",
+                                            "example": "3600"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/addClient": {
+            "post": {
+                "tags": [
+                    "Agregar cliente"
+                ],
+                "operationId": "App\\Http\\Controllers\\ClientController::create",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nombre del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "identification",
+                        "in": "query",
+                        "description": "Identificación del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_birth",
+                        "in": "query",
+                        "description": "Fecha nacimiento del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Creación de cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "name",
+                                        "identification",
+                                        "date_birth"
+                                    ],
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "format": "name",
+                                            "example": "pepe"
+                                        },
+                                        "identification": {
+                                            "type": "string",
+                                            "format": "identification",
+                                            "example": "123456789"
+                                        },
+                                        "date_birth": {
+                                            "type": "date",
+                                            "example": "1989-08-14"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
