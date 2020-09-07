@@ -8,12 +8,12 @@ composer install
 cp .env.example .env
 
 ## CONFIGURAR ARCHIVO .env
-DB_CONNECTION=mysql
-DB_HOST=ip host
-DB_PORT=3306
-DB_DATABASE=name database
-DB_USERNAME=user database
-DB_PASSWORD=password database
+* DB_CONNECTION=mysql
+* DB_HOST=ip host
+* DB_PORT=3306
+* DB_DATABASE=name database
+* DB_USERNAME=user database
+* DB_PASSWORD=password database
 
 ## CREAR LA KEY EN EL ARCHIVO .env
 php artisan key:generate
@@ -31,11 +31,11 @@ php artisan db:seed
 php artisan serve
 
 ## LINK DOCUMENTACION SWAGGER
-http://localhost:8000/api/documentation
+* http://localhost:8000/api/documentation
 
 ## CREDENCIALES - INICIAR SESION EN EL ITEM DE LOGIN - SWAGGER
-email : admin@admin.com
-password : 123456
+* email : admin@admin.com
+* password : 123456
 
 ## REALIZAR LAS DEMAS PETICIONES
 * Despues de hacer login, para desbloquear las otras peticiones seleccionar el boton Authorize

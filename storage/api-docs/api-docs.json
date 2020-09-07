@@ -7,21 +7,172 @@
     "servers": [
         {
             "url": "http://127.0.0.1:8000"
-        },
-        {
-            "url": "http://127.0.0.1:8000"
-        },
-        {
-            "url": "http://127.0.0.1:8000"
         }
     ],
     "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email - admin@admin.com",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña - 123456",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login usuario",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "email",
+                                        "password"
+                                    ],
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "format": "access_token",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBp"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "format": "token_type",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "expires_in",
+                                            "example": "3600"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/addClient": {
+            "post": {
+                "tags": [
+                    "Agregar cliente"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nombre del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "identification",
+                        "in": "query",
+                        "description": "Identificación del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_birth",
+                        "in": "query",
+                        "description": "Fecha nacimiento del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Creación de cliente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "name",
+                                        "identification",
+                                        "date_birth"
+                                    ],
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "format": "name",
+                                            "example": "pepe"
+                                        },
+                                        "identification": {
+                                            "type": "string",
+                                            "format": "identification",
+                                            "example": "123456789"
+                                        },
+                                        "date_birth": {
+                                            "type": "date",
+                                            "example": "1989-08-14"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
         "/api/addAgenda": {
             "post": {
                 "tags": [
                     "Agregar agenda"
                 ],
-                "operationId": "App\\Http\\Controllers\\AgendaController::addAgenda",
                 "parameters": [
                     {
                         "name": "id_client",
@@ -122,7 +273,6 @@
                 "tags": [
                     "Modificar agenda"
                 ],
-                "operationId": "App\\Http\\Controllers\\AgendaController::editAgenda",
                 "parameters": [
                     {
                         "name": "id",
@@ -201,166 +351,6 @@
                                         "status": {
                                             "type": "string",
                                             "example": "Cancelada"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Error de validación"
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
-        "/api/auth/login": {
-            "post": {
-                "tags": [
-                    "Login"
-                ],
-                "operationId": "App\\Http\\Controllers\\AuthController::login",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "Email - admin@admin.com",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "Contraseña - 123456",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/form-data": {}
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Login usuario",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "required": [
-                                        "email",
-                                        "password"
-                                    ],
-                                    "properties": {
-                                        "access_token": {
-                                            "type": "string",
-                                            "format": "access_token",
-                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBp"
-                                        },
-                                        "token_type": {
-                                            "type": "string",
-                                            "format": "token_type",
-                                            "example": "bearer"
-                                        },
-                                        "expires_in": {
-                                            "type": "expires_in",
-                                            "example": "3600"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Error de validación"
-                    }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
-            }
-        },
-        "/api/addClient": {
-            "post": {
-                "tags": [
-                    "Agregar cliente"
-                ],
-                "operationId": "App\\Http\\Controllers\\ClientController::create",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Nombre del cliente",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "identification",
-                        "in": "query",
-                        "description": "Identificación del cliente",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "date_birth",
-                        "in": "query",
-                        "description": "Fecha nacimiento del cliente",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/form-data": {}
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Creación de cliente",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "required": [
-                                        "name",
-                                        "identification",
-                                        "date_birth"
-                                    ],
-                                    "properties": {
-                                        "name": {
-                                            "type": "string",
-                                            "format": "name",
-                                            "example": "pepe"
-                                        },
-                                        "identification": {
-                                            "type": "string",
-                                            "format": "identification",
-                                            "example": "123456789"
-                                        },
-                                        "date_birth": {
-                                            "type": "date",
-                                            "example": "1989-08-14"
-                                        },
-                                        "id": {
-                                            "type": "integer",
-                                            "example": "1"
                                         }
                                     },
                                     "type": "object"
